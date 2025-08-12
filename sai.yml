@@ -1,4 +1,0 @@
-- name: playbook
-  hosts: localhost 
-
-#this is yto practice
