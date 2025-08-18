@@ -4,10 +4,7 @@
   tasks:
   - name: setup nodesource on Ubuntu/Debian
     ansible.builtin.shell: curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-    args:
-      warn: false
-
-
+    
   - name: install nodeJS
     ansible.builtin.apt:
      name: nodejs 
