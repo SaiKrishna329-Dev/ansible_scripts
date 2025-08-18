@@ -7,10 +7,11 @@
       url: https://www.mongodb.org/static/pgp/server-7.0.asc
       state: present
 
-  - name: Add MongoDB repository
+  - name: Add MongoDB repository (force jammy for Ubuntu 24.04)
     ansible.builtin.apt_repository:
-      repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/7.0 multiverse"
+      repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse"
       state: present
+
 
   - name: Update apt cache
     ansible.builtin.apt:
@@ -20,7 +21,6 @@
     ansible.builtin.apt:
       name: mongodb-org
       state: present
-
       update_cache: yes
 
   - name: Start and Enable MongoDB
