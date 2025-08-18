@@ -1,5 +1,5 @@
-- name: setup catalogue
-  hosts: localhost
+- name: Catalogue Component
+  hosts: catalogue
   become: yes
   tasks:
   - name: setup nodesource
