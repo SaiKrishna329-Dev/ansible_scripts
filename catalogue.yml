@@ -70,8 +70,8 @@
 
   - name: copy catalogue service config
     ansible.builtin.copy:
-    content: catalogue.service
-    dest: /etc/systemd/system/catalogue.service
+      src: catalogue.service
+      dest: /etc/systemd/system/catalogue.service
  
   - name: setup systemd service
     ansible.builtin.systemd_service: 
@@ -79,11 +79,11 @@
 
   - name: copy mongo repo
     ansible.builtin.copy:
-    content: mongodb-org.list
-    dest: /etc/apt/sources.list.d/mongodb-org.list
+      src: mongodb-org.list
+      dest: /etc/apt/sources.list.d/mongodb-org.list
 
   - name: install mongo client
-    ansible.builtin.yum: 
+    ansible.builtin.apt: 
       name: mongodb-org-shell 
       state: present 
 
