@@ -6,7 +6,7 @@
     ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
   - name: install nodeJS
-    ansible.builtin.yum:
+    ansible.builtin.apt:
      name: nodejs 
      state: installed
 
@@ -78,8 +78,8 @@
 
   - name: copy mongo repo
     ansible.builtin.copy:
-    content: mongo.repo
-    dest: /etc/yum.repos.d/mongo.repo
+    content: mongodb-org.list
+    dest: /etc/apt/sources.list.d/mongodb-org.list
 
   - name: install mongo client
     ansible.builtin.yum: 
@@ -87,7 +87,7 @@
       state: installed  
 
   - name: load schema
-    ansible.builtin.shell: mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js  
+    ansible.builtin.shell: mongo --host mongodb.learndevops.sbs </app/schema/catalogue.js  
 
   - name: start and enable service 
     ansible.builtin.systemd_service:

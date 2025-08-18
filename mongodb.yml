@@ -4,11 +4,11 @@
   tasks:
   - name: Setup MongoDB repo
     ansible.builtin.copy:
-      src: mongo.repo
-      dest: /etc/yum.repos.d/mongo.repo
+      src: mongodb-org.list
+      dest: /etc/apt/sources.list.d/mongodb-org.list
 
   - name: Install MongoDB
-    ansible.builtin.yum: 
+    ansible.builtin.apt: 
       name: mongodb-org
       state: installed
 
