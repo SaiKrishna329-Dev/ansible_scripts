@@ -95,9 +95,9 @@
 
   - name: Add MongoDB APT repository
     ansible.builtin.apt_repository:
-    repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse"
-    state: present
-    filename: 'mongodb-org-6.0'
+      repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse"
+      state: present
+      filename: 'mongodb-org-6.0'
 
   - name: Update apt cache
     ansible.builtin.apt:
