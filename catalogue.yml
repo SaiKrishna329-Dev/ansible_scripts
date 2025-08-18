@@ -89,19 +89,19 @@
 
 
   - name: Add MongoDB GPG key
-  ansible.builtin.apt_key:
-    url: https://pgp.mongodb.com/server-6.0.asc
-    state: present
+    ansible.builtin.apt_key:
+      url: https://pgp.mongodb.com/server-6.0.asc
+      state: present
 
-- name: Add MongoDB APT repository
-  ansible.builtin.apt_repository:
+  - name: Add MongoDB APT repository
+    ansible.builtin.apt_repository:
     repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse"
     state: present
     filename: 'mongodb-org-6.0'
 
-- name: Update apt cache
-  ansible.builtin.apt:
-    update_cache: yes
+  - name: Update apt cache
+    ansible.builtin.apt:
+      update_cache: yes
 
 
   - name: Install MongoDB client
