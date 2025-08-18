@@ -110,8 +110,14 @@
       state: present
       update_cache: yes
 
+  - name: Install MongoDB shell (mongosh)
+    ansible.builtin.apt:
+      name: mongodb-mongosh
+      state: present
+      update_cache: yes
+      
   - name: load schema
-    ansible.builtin.shell: mongo --host mongodb.learndevops.sbs </app/schema/catalogue.js  
+    ansible.builtin.shell: mongosh --host mongodb.learndevops.sbs </app/schema/catalogue.js  
 
   - name: start and enable service 
     ansible.builtin.systemd_service:
