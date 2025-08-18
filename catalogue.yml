@@ -77,15 +77,34 @@
     ansible.builtin.systemd_service: 
       daemon_reload: true  
 
-  - name: copy mongo repo
-    ansible.builtin.copy:
-      src: mongodb-org.list
-      dest: /etc/apt/sources.list.d/mongodb-org.list
+  #- name: copy mongo repo
+    #ansible.builtin.copy:
+      #src: mongodb-org.list
+      #dest: /etc/apt/sources.list.d/mongodb-org.list
+  
+  - name: Remove broken mongodb-org.list
+    ansible.builtin.file:
+      path: /etc/apt/sources.list.d/mongodb-org.list
+      state: absent
 
-  - name: install mongo client
-    ansible.builtin.apt: 
-      name: mongodb-org-shell 
-      state: present 
+
+  - name: Add MongoDB APT repository
+    ansible.builtin.apt_repository:
+      repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse"
+      state: present
+      filename: "mongodb-org"
+
+  - name: Add MongoDB GPG key
+    ansible.builtin.apt_key:
+      url: https://www.mongodb.org/static/pgp/server-6.0.asc
+      state: present
+
+  - name: Install MongoDB client
+    ansible.builtin.apt:
+      name: mongodb-org-shell
+      state: present
+      update_cache: yes
+
 
   - name: load schema
     ansible.builtin.shell: mongo --host mongodb.learndevops.sbs </app/schema/catalogue.js  
