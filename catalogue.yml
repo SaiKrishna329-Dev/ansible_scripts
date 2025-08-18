@@ -8,7 +8,8 @@
   - name: install nodeJS
     ansible.builtin.apt:
      name: nodejs 
-     state: installed
+     state: present
+     update_cache: yes
 
  # - name: create roboshop user
   #  ansible.builtin.command: useradd roboshop
@@ -84,7 +85,7 @@
   - name: install mongo client
     ansible.builtin.yum: 
       name: mongodb-org-shell 
-      state: installed  
+      state: present 
 
   - name: load schema
     ansible.builtin.shell: mongo --host mongodb.learndevops.sbs </app/schema/catalogue.js  

@@ -10,7 +10,8 @@
   - name: Install MongoDB
     ansible.builtin.apt: 
       name: mongodb-org
-      state: installed
+      state: present
+      update_cache: yes
 
   - name: Start and Enable MongoDB
     ansible.builtin.service:
