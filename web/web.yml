@@ -1,6 +1,42 @@
----
 - name: web component playbook 
   hosts: web
   become: yes
+
   tasks:
-  - name: 
+  - name: install nginx
+    ansible.builtin.apt: 
+      name: nginx
+      state: present
+      update_cache: yes
+
+  - name: start and enable nginx
+    ansible.builtin.service:
+      name: start nginx
+      state: started
+      enabled: yes 
+
+  - name: remove the default content
+    ansible.builtin.command: rm -rf /usr/share/nginx/html/*
+
+  - name: Download web.zip from S3
+    ansible.builtin.get_url: 
+      url: https://roboshop-builds.s3.amazonaws.com/web.zip
+      dest: /tmp/web.zip
+      mode: '0644'
+
+  - name: Unarchive web.zip
+    ansible.builtin.unarchive:
+      src: /tmp/web.zip
+      dest: /usr/share/nginx/html
+      remote_src: yes
+
+  - name: Reverse proxy configuration
+    ansible.builtin.copy:  
+      src: roboshop.conf
+      dest: /etc/nginx/default.d
+      mode: '0644'  
+
+  - name: Restart nginx
+    ansible.builtin.service:
+      name: nginx
+      state: restarted           
