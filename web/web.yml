@@ -1,0 +1,6 @@
+---
+- name: web component playbook 
+  hosts: web
+  become: yes
+  tasks:
+  - name: 
