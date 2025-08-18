@@ -7,10 +7,27 @@
       src: mongodb-org.list
       dest: /etc/apt/sources.list.d/mongodb-org.list
 
+  # name: Setup MongoDB repo on Ubuntu
+ 
+  - name: Import MongoDB public GPG key
+    ansible.builtin.apt_key:
+      url: https://www.mongodb.org/static/pgp/server-7.0.asc
+      state: present
+
+  - name: Add MongoDB repository
+    ansible.builtin.apt_repository:
+      repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/7.0 multiverse"
+      state: present
+
+  - name: Update apt cache
+    ansible.builtin.apt:
+      update_cache: yes
+
   - name: Install MongoDB
-    ansible.builtin.apt: 
+    ansible.builtin.apt:
       name: mongodb-org
       state: present
+
       update_cache: yes
 
   - name: Start and Enable MongoDB
