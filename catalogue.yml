@@ -118,6 +118,7 @@
       
   - name: load schema
     ansible.builtin.shell: mongosh --host mongodb.learndevops.sbs </app/schema/catalogue.js  
+    ignore_errors: true
 
   - name: start and enable service 
     ansible.builtin.systemd_service:
