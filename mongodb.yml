@@ -2,13 +2,6 @@
   hosts: mongodb
   become: yes
   tasks:
-  - name: Setup MongoDB repo
-    ansible.builtin.copy:
-      src: mongodb-org.list
-      dest: /etc/apt/sources.list.d/mongodb-org.list
-
-  # name: Setup MongoDB repo on Ubuntu
- 
   - name: Import MongoDB public GPG key
     ansible.builtin.apt_key:
       url: https://www.mongodb.org/static/pgp/server-7.0.asc
