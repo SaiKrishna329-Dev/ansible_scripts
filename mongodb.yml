@@ -2,16 +2,16 @@
   hosts: mongodb
   become: yes
   tasks:
-  - name: Import MongoDB public GPG key
+  - name: Add MongoDB GPG key
     ansible.builtin.apt_key:
-      url: https://www.mongodb.org/static/pgp/server-6.0.asc
+      url: https://pgp.mongodb.com/server-6.0.asc
       state: present
 
-  - name: Add MongoDB repository (force jammy for Ubuntu 24.04)
+  - name: Add MongoDB APT repository
     ansible.builtin.apt_repository:
-      repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse"
+      repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse"
       state: present
-
+      filename: 'mongodb-org-6.0'
 
   - name: Update apt cache
     ansible.builtin.apt:
